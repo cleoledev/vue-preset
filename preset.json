@@ -1,0 +1,17 @@
+{
+  "useConfigFiles": true,
+  "plugins": {
+    "@vue/cli-plugin-babel": {
+      "version": "~4.5.0"
+    },
+    "@vue/cli-plugin-router": {
+      "version": "~4.5.0"
+    },
+    "@vue/cli-plugin-eslint": {
+      "version": "~4.5.0",
+      "config": "standard"
+    }
+  },
+  "vueVersion": "2",
+  "cssPreprocessor": "dart-sass"
+}
