@@ -4,7 +4,7 @@
 ## 安裝使用
 
 ```
-vue create -p direct:https://github.com/cleosyuu/vue-preset.git <project name> -m <npm|yarn>
+vue create -p cleosyuu/vue-preset <project name> -m <npm|yarn>
 ```
 ## Features
 
