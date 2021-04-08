@@ -54,9 +54,8 @@ module.exports = {
         routes: renderRoutes,
         renderer: new Renderer({
           // 打事件決定渲染時機
-          renderAfterDocumentEvent: 'render-event',
-          // Prerender時window.__PRERENDER_PROCESSING === true
-          injectProperty: '__PRERENDER_PROCESSING',
+          // renderAfterDocumentEvent: 'render-event',
+          injectProperty: '__PRERENDER_PROCESSING', // Prerender時window.__PRERENDER_PROCESSING === true
           inject: true,
           headless: true
         }),

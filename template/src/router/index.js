@@ -9,6 +9,10 @@ const routes = [
     path: '/index.html',
     name: 'index',
     component: Index
+  },
+  {
+    path: '*',
+    redirect: { name: 'index' }
   }
 ]
 
