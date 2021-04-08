@@ -6,9 +6,7 @@ module.exports = (api, options, rootOptions) => {
       "lint": "vue-cli-service lint src/**/*.{js,vue} --fix && stylelint --cache src/**/*.{vue,scss} --fix"
     },
     "dependencies": {
-      "axios": "^0.21.0",
-      "detect-browser": "^5.2.0",
-      "vue-router": "^3.2.0"
+      "detect-browser": "^5.2.0"
     },
     "devDependencies": {
       "@fullhuman/postcss-purgecss": "3.0.0",
@@ -42,6 +40,16 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
+  if (options.useVuex) {
+    api.extendPackage({
+      "dependencies": {
+        "vuex": "^3.4.0"
+      },
+      "devDependencies": {
+        "@vue/cli-plugin-vuex": "~4.5.0"
+      }
+    })
+  }
 
   // 删除 vue-cli 默認的 src 和 public folder
   api.render(files => {
@@ -52,5 +60,6 @@ module.exports = (api, options, rootOptions) => {
   })
 
   // 根據自定義模板生成項目結構
-  api.render('./template')
+  api.render('./template', { ...options })
+  if (options.useVuex) api.render('./optional/vuex')
 }

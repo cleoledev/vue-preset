@@ -1,4 +1,4 @@
-# vue-temp-preset
+# vue-preset
 基于 vue-cli 4 搭建的前端模板
 
 ## 安裝使用
