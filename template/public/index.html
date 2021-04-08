@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-Hant-TW">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,7 +7,10 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <link rel="icon" href="./favicon.ico">
-    <title>104 人力銀行</title>
+    <%_ if (!options.addPlugin.includes('vue-meta')) { _%>
+    <title>...Title</title>
+    <meta name="description" content="...Description" />
+    <%_ } _%>
   </head>
   <body>
     <noscript>
