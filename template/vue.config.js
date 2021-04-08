@@ -42,7 +42,7 @@ module.exports = {
 
     if (process.env.BUILD === 'true') {
       const renderRoutes = [
-        '/'
+        '/index.html'
       ]
 
       const prerender = new PrerenderSPAPlugin({
@@ -53,16 +53,17 @@ module.exports = {
         // Required - Routes to render.
         routes: renderRoutes,
         renderer: new Renderer({
-          // 打事件決定渲染時機
+          // -> 打事件決定渲染時機
           // renderAfterDocumentEvent: 'render-event',
-          injectProperty: '__PRERENDER_PROCESSING', // Prerender時window.__PRERENDER_PROCESSING === true
+          // -> Prerender時window.__PRERENDER_PROCESSING === true
+          injectProperty: '__PRERENDER_PROCESSING',
           inject: true,
           headless: true
         }),
         postProcess (context) {
           if (context.route.endsWith('.html')) {
             context.outputPath = resolve(
-              `dist${process.env.BASE_URL}/${context.rout}`
+              `dist${process.env.BASE_URL}/${context.route}`
             )
           }
 
