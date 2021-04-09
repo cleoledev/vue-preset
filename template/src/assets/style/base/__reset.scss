@@ -39,8 +39,8 @@ ol {
 /* Set core body defaults */
 body {
   // min-height: 100vh;
+  // line-height: 1.5;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
 }
 
 a {
@@ -94,6 +94,10 @@ select {
   background-color: transparent;
   outline: none;
   appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
 }
 
 button {

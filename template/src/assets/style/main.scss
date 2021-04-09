@@ -1,4 +1,7 @@
-@use './font-face' as *;
+@forward './base/reset';
+@forward './animation/v-transition';
+@forward './utilities';
+@use './base/font-face';
 
 html {
   font-size: 10px;
