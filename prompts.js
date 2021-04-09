@@ -7,6 +7,12 @@ module.exports = [
     default: "/"
   },
   {
+    name: "useCompositionAPI",
+    type: "confirm",
+    message: "是否使用 Composition API:",
+    default: false
+  },
+  {
     name: "useVuex",
     type: "confirm",
     message: "是否啟用 Vuex:",

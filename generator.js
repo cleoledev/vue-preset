@@ -13,39 +13,59 @@ const packageVersionMap = new Map([
   ['stylelint-webpack-plugin', '^2.1.1',],
   ['vuex', '^3.4.0'],
   ['@vue/cli-plugin-vuex', '~4.5.0'],
+  ['@vue/composition-api', 'latest'],
+  ['vuex-composition-helpers', '^1.0.23'],
   ['axios', '^0.21.1'],
   ['gsap', '^3.6.1'],
   ['vue-meta', '^2.4.0']
 ])
 
-const dependenciesPlugin = ['vuex', 'detect-browser', 'axios', 'gsap', 'vue-meta']
-const optionalPlugin = ['vuex', '@vue/cli-plugin-vuex', 'axios', 'gsap', 'vue-meta']
+const dependenciesPlugin = [
+  'vuex',
+  'detect-browser',
+  'axios',
+  'gsap',
+  'vue-meta'
+]
+
+const optionalPlugin = [
+  'vuex',
+  '@vue/cli-plugin-vuex',
+  'axios',
+  'gsap',
+  'vue-meta',
+  '@vue/composition-api',
+  'vuex-composition-helpers'
+]
+
+const installPackages = {
+  dependencies: {},
+  devDependencies: {}
+}
 
 module.exports = (api, options, rootOptions) => {
-  const installPackages = {
-    dependencies: {},
-    devDependencies: {}
-  }
-
   for (let [package, version] of packageVersionMap.entries()) {
     if (optionalPlugin.includes(package)) continue
-    if (dependenciesPlugin.includes(package)) {
-      installPackages.dependencies[package] = version
-    } else {
-      installPackages.devDependencies[package] = version
-    }
+    addPackage(package)
+  }
+
+  // 安裝 Composition API
+  if (options.useCompositionAPI) {
+    addPackage('@vue/composition-api')
   }
 
   // 安裝 Vuex
   if (options.useVuex) {
-    installPackages.dependencies['vuex'] = packageVersionMap.get('vuex')
-    installPackages.devDependencies['@vue/cli-plugin-vuex'] = packageVersionMap.get('@vue/cli-plugin-vuex')
+    addPackage('vuex')
+    addPackage('@vue/cli-plugin-vuex')
+
+    if (options.useCompositionAPI) addPackage('vuex-composition-helpers')
   }
 
   // 安裝額外 plugin
   if (options.addPlugin.length) {
     options.addPlugin.forEach(plugin => {
-      installPackages.dependencies[plugin] = packageVersionMap.get(plugin)
+      addPackage(plugin)
     })
   }
 
@@ -94,5 +114,13 @@ module.exports = (api, options, rootOptions) => {
     api.render({
       './src/plugins/axios.js': './optional/axios.js'
     })
+  }
+}
+
+function addPackage (packageName) {
+  if (dependenciesPlugin.includes(packageName)) {
+    installPackages.dependencies[packageName] = packageVersionMap.get(packageName)
+  } else {
+    installPackages.devDependencies[packageName] = packageVersionMap.get(packageName)
   }
 }
